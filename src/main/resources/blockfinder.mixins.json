@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.7",
+  "package": "iafenvoy.blockfinder.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ClientPlayNetworkHandlerMixin",
+    "GameRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "DummyProfilerMixin"
+  ]
+}

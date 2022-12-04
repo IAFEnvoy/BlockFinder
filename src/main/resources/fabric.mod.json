@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "blockfinder",
+  "version": "1.0.0",
+  "name": "Block Finder",
+  "description": "Find any block in the world on client side.",
+  "authors": [
+    "IAFEnvoy"
+  ],
+  "license": "GPL-3.0",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "iafenvoy.blockfinder.BlockFinder"
+    ]
+  },
+  "mixins": [
+    "blockfinder.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.16.x",
+    "java": ">=8"
+  }
+}
