@@ -1,8 +1,8 @@
 package iafenvoy.blockfinder.finder;
 
 import com.ibm.icu.impl.Pair;
-import iafenvoy.blockfinder.util.TripleGroup;
 import iafenvoy.blockfinder.render.Color;
+import iafenvoy.blockfinder.util.TripleGroup;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

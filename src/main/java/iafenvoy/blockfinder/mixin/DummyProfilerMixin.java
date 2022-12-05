@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class DummyProfilerMixin {
     @Inject(method = "swap(Ljava/lang/String;)V", at = @At("HEAD"))
     private void swap(String type, CallbackInfo ci) {
-        RenderQueue.get().onRender(type);
+        RenderQueue.get().onRender(type);//TODO:Compatible with cloud disable option
     }
 }

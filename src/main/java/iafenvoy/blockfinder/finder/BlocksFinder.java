@@ -37,7 +37,7 @@ public class BlocksFinder {
         Color color = new Color(r, g, b);
         blocks.add(Pair.of(block, color));
         for (ChunkData cd : data)
-            cd.addFinder(block, color);
+            SERVICE.submit(() -> cd.addFinder(block, color));
     }
 
     public static boolean hadBlock(Block block) {
@@ -53,7 +53,7 @@ public class BlocksFinder {
     public static void removeBlock(Block block) {
         blocks.removeIf(x -> x.first == block);
         for (ChunkData cd : data)
-            cd.removeFinder(block);
+            SERVICE.submit(() -> cd.removeFinder(block));
     }
 
     public static void onChunkUnload(int chunkX, int chunkZ) {
