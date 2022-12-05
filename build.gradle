@@ -27,10 +27,10 @@ dependencies {
     // You may need to force-disable transitiveness on them.
 
     //malilib
-    modImplementation "fi.dy.masa.malilib:malilib:fabric-1.16.4-0.10.0-dev.21+arne.5"
+//    modImplementation "fi.dy.masa.malilib:malilib:fabric-1.16.4-0.10.0-dev.21+arne.5"
 
     //mod menu api
-    modImplementation "io.github.prospector.modmenu:modmenu:1.16.8"
+//    modImplementation "io.github.prospector.modmenu:modmenu:1.16.8"
 }
 
 processResources {

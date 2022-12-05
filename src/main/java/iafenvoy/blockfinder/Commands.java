@@ -1,13 +1,17 @@
 package iafenvoy.blockfinder;
 
+import com.ibm.icu.impl.Pair;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import iafenvoy.blockfinder.finder.BlocksFinder;
+import iafenvoy.blockfinder.render.Color;
 import iafenvoy.blockfinder.util.RegistryUtils;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.text.Text;
+
+import java.util.List;
 
 import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
@@ -45,6 +49,19 @@ public class Commands {
                                         return 1;
                                     }
                                     BlocksFinder.removeBlock(block);
+                                    return 0;
+                                })))
+                .then(literal("list")
+                        .executes(ctx -> {
+                            List<Pair<Block, Color>> blocks = BlocksFinder.getBlockFinders();
+                            for (Pair<Block, Color> pair : blocks)
+                                ctx.getSource().sendFeedback(Text.of(String.format("%s §%d §%d §%d", pair.first.getName().asString(), pair.second.getRed(), pair.second.getGreen(), pair.second.getBlue())));//TODO: color
+                            return 0;
+                        }))
+                .then(literal("range")
+                        .then(argument("range", IntegerArgumentType.integer(0, 36))
+                                .executes(ctx -> {
+                                    BlocksFinder.setRange(IntegerArgumentType.getInteger(ctx, "range"));
                                     return 0;
                                 }))));
     }

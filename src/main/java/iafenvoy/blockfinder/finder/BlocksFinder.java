@@ -18,6 +18,7 @@ public class BlocksFinder {
     private static final ExecutorService SERVICE = Executors.newFixedThreadPool(5);
     private static final CopyOnWriteArrayList<ChunkData> data = new CopyOnWriteArrayList<>();
     private static final CopyOnWriteArrayList<Pair<Block, Color>> blocks = new CopyOnWriteArrayList<>();
+    private static int range = 10;
 
     public static void onChunkData(World world, int chunkX, int chunkZ) {
         SERVICE.submit(() -> {
@@ -45,6 +46,10 @@ public class BlocksFinder {
         return false;
     }
 
+    public static List<Pair<Block, Color>> getBlockFinders() {
+        return blocks;
+    }
+
     public static void removeBlock(Block block) {
         blocks.removeIf(x -> x.first == block);
         for (ChunkData cd : data)
@@ -57,13 +62,17 @@ public class BlocksFinder {
 
     public static void addTo(List<Cube> renderers, int chunkX, int chunkZ) {
         for (ChunkData d : data)
-            if (inRange(d.getChunkX(), d.getChunkZ(), chunkX, chunkZ, 10))
+            if (inRange(d.getChunkX(), d.getChunkZ(), chunkX, chunkZ, range))
                 for (TripleGroup<BlockPos, Block, Color> pos : d.getPos())
                     renderers.add(new Cube(pos.first, pos.third));
     }
 
     private static boolean inRange(int cX, int cZ, int pX, int pZ, int dis) {
         return Math.abs(cX - pX) + Math.abs(cZ - pZ) <= dis;
+    }
+
+    public static void setRange(int range) {
+        BlocksFinder.range = range;
     }
 
     public static void onBlockUpdate(BlockPos pos, Block block) {
