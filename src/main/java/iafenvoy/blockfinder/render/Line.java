@@ -9,18 +9,9 @@ import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 public class Line extends Renderer {
-
     public final Vec3d start;
     public final Vec3d end;
     public final Color color;
-
-    public Line() {
-        this(Vec3d.ZERO, Vec3d.ZERO, Color.WHITE);
-    }
-
-    public Line(Vec3d start, Vec3d end) {
-        this(start, end, Color.WHITE);
-    }
 
     public Line(Vec3d start, Vec3d end, Color color) {
         this.start = start;
@@ -32,7 +23,7 @@ public class Line extends Renderer {
     public void render() {
         if (this.start == null || this.end == null || this.color == null) return;
 
-        Vec3d camPos = this.mc.gameRenderer.getCamera().getPos();
+        Vec3d camPos = this.client.gameRenderer.getCamera().getPos();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
 
@@ -63,5 +54,4 @@ public class Line extends Renderer {
         double z = (this.end.getZ() - this.start.getZ()) / 2 + this.start.getZ();
         return new BlockPos(x, y, z);
     }
-
 }
