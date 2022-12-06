@@ -17,9 +17,7 @@ public class CubeRenderer {
         assert client.player != null;
         BlocksFinder.addTo(renderers, client.player.chunkX, client.player.chunkZ);
 
-        RenderSystem.enableBlend();
         RenderSystem.disableDepthTest();
-        RenderSystem.enableAlphaTest();
         RenderSystem.disableCull();
         RenderSystem.colorMask(true, true, true, true);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -30,8 +28,6 @@ public class CubeRenderer {
             renderer.render();
 
         RenderSystem.popMatrix();
-        RenderSystem.disableAlphaTest();
         RenderSystem.enableCull();
-        RenderSystem.disableBlend();
     }
 }

@@ -19,8 +19,10 @@ public class BlocksFinder {
     private static final CopyOnWriteArrayList<ChunkData> data = new CopyOnWriteArrayList<>();
     private static final CopyOnWriteArrayList<Pair<Block, Color>> blocks = new CopyOnWriteArrayList<>();
     private static int range = 10;
+    public static boolean parseOnData = true;
 
     public static void onChunkData(World world, int chunkX, int chunkZ) {
+        if (!parseOnData) return;
         SERVICE.submit(() -> {
             try {
                 ChunkData cd = new ChunkData(chunkX, chunkZ, world);
@@ -36,8 +38,9 @@ public class BlocksFinder {
     public static void addBlock(Block block, int r, int g, int b) {
         Color color = new Color(r, g, b);
         blocks.add(Pair.of(block, color));
-        for (ChunkData cd : data)
-            SERVICE.submit(() -> cd.addFinder(block, color));
+        if (parseOnData)
+            for (ChunkData cd : data)
+                SERVICE.submit(() -> cd.addFinder(block, color));
     }
 
     public static boolean hadBlock(Block block) {

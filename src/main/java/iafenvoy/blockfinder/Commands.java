@@ -58,6 +58,17 @@ public class Commands {
                                 ctx.getSource().sendFeedback(Text.of(String.format("%s %s", pair.first.getName().getString(), pair.second.toString())));
                             return 0;
                         }))
+                .then(literal("mode")
+                        .then(literal("all")
+                                .executes(ctx -> {
+                                    BlocksFinder.parseOnData = true;
+                                    return 0;
+                                }))
+                        .then(literal("append")
+                                .executes(ctx -> {
+                                    BlocksFinder.parseOnData = false;
+                                    return 0;
+                                })))
                 .then(literal("range")
                         .then(argument("range", IntegerArgumentType.integer(0, 36))
                                 .executes(ctx -> {
