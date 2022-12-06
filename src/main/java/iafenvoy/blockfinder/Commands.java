@@ -55,7 +55,7 @@ public class Commands {
                         .executes(ctx -> {
                             List<Pair<Block, Color>> blocks = BlocksFinder.getBlockFinders();
                             for (Pair<Block, Color> pair : blocks)
-                                ctx.getSource().sendFeedback(Text.of(String.format("%s §c%d §a%d §9%d", pair.first.getName().getString(), pair.second.getRed(), pair.second.getGreen(), pair.second.getBlue())));
+                                ctx.getSource().sendFeedback(Text.of(String.format("%s %s", pair.first.getName().getString(), pair.second.toString())));
                             return 0;
                         }))
                 .then(literal("range")
@@ -63,6 +63,11 @@ public class Commands {
                                 .executes(ctx -> {
                                     BlocksFinder.setRange(IntegerArgumentType.getInteger(ctx, "range"));
                                     return 0;
-                                }))));
+                                })))
+                .then(literal("clear")
+                        .executes(ctx -> {
+                            BlocksFinder.clear();
+                            return 0;
+                        })));
     }
 }

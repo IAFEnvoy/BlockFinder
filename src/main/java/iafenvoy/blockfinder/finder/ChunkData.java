@@ -61,4 +61,8 @@ public class ChunkData {
     public int getChunkZ() {
         return chunkZ;
     }
+
+    public void clear() {
+        this.pos.clear();
+    }
 }

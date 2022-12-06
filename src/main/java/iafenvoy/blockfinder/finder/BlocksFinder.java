@@ -83,4 +83,9 @@ public class BlocksFinder {
                 break;
             }
     }
+
+    public static void clear() {
+        for (ChunkData d : data)
+            d.clear();
+    }
 }

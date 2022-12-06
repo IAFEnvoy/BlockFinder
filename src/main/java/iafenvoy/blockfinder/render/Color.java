@@ -34,4 +34,9 @@ public class Color {
     public float getFBlue() {
         return this.getBlue() / 255.0F;
     }
+
+    @Override
+    public String toString() {
+        return String.format("§c%d §a%d §9%d", this.getRed(), this.getGreen(), this.getBlue());
+    }
 }
